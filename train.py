@@ -268,9 +268,9 @@ def train_model(config):
             'global_step': global_step
         }, model_filename)
 
-        pt_nums = len(glob.glob("./opus_books/weights/*.pt"))
+        pt_nums = len(glob.glob("./opus_books_weights/*.pt"))
         while pt_nums > 5:
-            file_path = f"./opus_books/weights/tmodel_{epoch-5:02d}.pt"
+            file_path = f"./opus_books_weights/tmodel_{epoch-5:02d}.pt"
             if os.path.exists(file_path):
                 os.remove(file_path)
 
