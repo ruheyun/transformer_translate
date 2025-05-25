@@ -12,6 +12,7 @@ import warnings
 from tqdm import tqdm
 import os
 from pathlib import Path
+import glob
 
 # Huggingface datasets and tokenizers
 from datasets import load_dataset
@@ -266,6 +267,12 @@ def train_model(config):
             'optimizer_state_dict': optimizer.state_dict(),
             'global_step': global_step
         }, model_filename)
+
+        pt_nums = len(glob.glob("./opus_books/weights/*.pt"))
+        while pt_nums > 5:
+            file_path = f"./opus_books/weights/tmodel_{epoch-5:02d}.pt"
+            if os.path.exists(file_path):
+                os.remove(file_path)
 
 
 if __name__ == '__main__':
